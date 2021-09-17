@@ -1,0 +1,100 @@
+.myForm {
+    text-align: center;
+}
+
+.myForm .logout {
+    float: left;
+    height: 2%;
+    margin-left: 2%;
+    margin-right: -15%;
+    margin-top: 1%;
+    margin-bottom: 5%;
+    width: 15%;
+}
+
+.myForm .formLabel {
+    text-align: right;
+    font-size: 2vw;
+}
+
+.myForm #content {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 2%;
+}
+
+.myForm input  {
+    margin-top: 3%;
+    display: inline-block;
+    text-align: center;
+}
+
+.myForm #button {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.myForm [class*=mybox] {
+    width: 90%;
+}
+
+.centralized {
+    text-align: center;
+    margin: auto;
+}
+
+.erro {
+    width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: -2%;
+}
+
+.title {
+    text-align: center;
+    margin-top: 2%;
+    color: rgb(24, 19, 29);
+}
+
+.postContent {
+    text-align: center;
+    color:rgb(61, 32, 78);
+    font-size: 20px;
+    padding: 10px;
+    font: 1.8rem/1.4 Georgia, serif;
+}
+
+.postLink {
+    padding: 10px;
+    font-size: 30px;
+    color: rgb(8, 8, 121)
+}
+
+.board {
+    box-shadow: 5px 5px 5px black;
+    background-color: rgb(166, 230, 230);
+    border-radius: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.6%;
+    width: 40%;
+    height: 40%;
+    padding: 10px;
+    text-align: center;
+}
+
+.board .link {
+    color: rgb(47, 88, 116);
+}
+
+body {
+    background-image: url('/static/bg.jpg');
+}
+
+#return {
+    width: 15%;
+    position: absolute;
+}
