@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="/"><img id="return" src='/static/return.png'></a>
+<div class="board">
+  <h1 class="title">
+    {% block title %}
+      {% if post %}
+        {{post[0]}}
+      {% endif %}
+    {% endblock %}
+  </h1>
+  <p class="autor">Autor:
+    {% if post %}
+      "{{post[3]}}"
+    {% endif %}
+  </p>
+  <p class="postContent">
+    {% if post %}
+      "{{post[1]}}"
+    {% endif %}
+  </p>
+</div>
+{% endblock %}
