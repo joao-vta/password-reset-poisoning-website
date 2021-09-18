@@ -13,7 +13,7 @@ app.secret_key = urandom(20)
 
 #função auxiliar para realizar query no banco de dados    
 def executeQuery(query, param=None):
-    mysqlConnection = mysql.connector.connect(user='debian-sys-maint', password='26QutYzITxdC6Aa7',
+    mysqlConnection = mysql.connector.connect(user='xxxxxxx', password='xxxxxxxx',
                               host='127.0.0.1',
                               database='siteHost')
     myCursor = mysqlConnection.cursor()
