@@ -10,5 +10,6 @@ Instruções para uso local:
 - - CREATE TABLE siteHost.posts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, titulo VARCHAR(400), conteudo VARCHAR(400), link VARCHAR(400), author VARCHAR(400));
 - Insira manualmente usuários no banco de dados
 - entre no venv navegando até a pasta e executando  '. bin/activate'
-- determine o app do flask executando 'export FLASK_APP=hello.py'
+- Especifique o app do flask executando 'export FLASK_APP=hello.py'
+- - Opcionalmente, execute 'export FLASK_ENV=development' para ativar modo de desenvolvimento
 - inicie o site executando 'flask run'
