@@ -1,6 +1,4 @@
-.myForm {
-    text-align: center;
-}
+
 
 .myForm .logout {
     float: left;
@@ -14,11 +12,12 @@
 
 .myForm .formLabel {
     text-align: right;
-    font-size: 2vw;
+    font-size: 1.6rem;
+    margin-top: 4vh;
 }
 
 .myForm #content {
-    text-align: center;
+
     width: 90%;
     margin: auto;
     margin-top: 4%;
@@ -26,18 +25,22 @@
 }
 
 .myForm input  {
-    margin-top: 3%;
+
     display: inline-block;
     text-align: center;
+    outline: none!important;
+}
+.myForm input:focus{
+    box-shadow: none;
 }
 
 .myForm #button {
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 30%;
 }
-
-.myForm [class*=mybox] {
-    width: 90%;
+.myForm #button:hover{
+    width: 60%;
 }
 
 .centralized {
@@ -74,27 +77,74 @@
 }
 
 .board {
-    box-shadow: 5px 5px 5px black;
-    background-color: rgb(166, 230, 230);
-    border-radius: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2.6%;
-    width: 40%;
-    height: 40%;
-    padding: 10px;
-    text-align: center;
+    background-color: rgb(250,250,250, 0.7);
+    border-radius: 25px;
+    width: 30vw;
+    height: 60vh;
+    padding: 50px;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 20vh;   
+    z-index: 2;
+    animation: fundoAnimado 5s infinite alternate;
 }
+
 
 .board .link {
     color: rgb(47, 88, 116);
 }
 
 body {
-    background-image: url('/static/bg.jpg');
+    background-image: url(./pipoca.jpg);
+    background-size: cover;
+    overflow: hidden;
+}
+
+
+body ::selection{
+    color: rgb(158, 60, 57);
+}
+
+.board .botoesLogin{
+    display: flex;
+    justify-content: space-around;
+}
+
+.board .botoesLogin input {
+    transition: 0.5s;
+}
+.board .botoesLogin input:hover{
+    border-radius: 50px;
+    width: 60%;
+}
+#button {
+    transition: 0.5s;
+}
+#button:hover{
+    border-radius: 50px;
+    width: 60%;
 }
 
 #return {
-    width: 15%;
+    transform: rotate(180deg);
+    width: 4rem;
+    margin-left: 48px;
+    margin-top: 25px;
+    transition: 1s;
+}
+#return:hover{    
+    transform: rotate(-180deg);
+}
+.pipoca{
     position: absolute;
+    top: -10vh;
+    width: 106px;
+    /* animation: pipocaCaindo 4s infinite ;
+    z-index: 0; */
+}
+
+@keyframes fundoAnimado{
+    0% {background-color: #fafafa33; border: 1px solid #0e0c0cbe;}
+    50% {background-color: #fafafa80;border: 1px solid #0e0c0c69;}
+    100% {background-color: #fafafab3;border: 1px solid #0e0c0c00;}
 }

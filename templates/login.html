@@ -2,27 +2,28 @@
 
 {% block content %}
 <div class="board">
+
+  
+
   <h1 class="title">{% block title %}Login{% endblock %}</h1>
   <form class="myForm" autocomplete="off" method="post">
 
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm-12">
         <label class="formLabel" for="username"><b>Nome de Usuario: </b></label><br>
-        </div>
-      <div class="col-sm">
-        <input id="username" name="username" class="mybox form-control" type="username" placeholder="Nome de Usuario"><br>
+        <input id="username" name="username" class="mybox form-control" type="username" ><br>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm-12">
         <label class="formLabel" for="password"><b>Senha: </b></label>
-      </div>
-      <div class="col-sm">
-        <input id="password" name="password" class="mybox form-control" type="text" placeholder="Senha">
+        <input id="password" name="password" class="mybox form-control" type="password" >
       </div>
     </div>
-    
-    <input id="button" class="btn btn-primary" type="submit" value="login">
+    <div class="botoesLogin">
+      <input id="button" class="btn btn-success" type="submit" value="Cadastro">
+      <input id="button" class="btn btn-primary" type="submit" value="login">
+    </div>
   </form>
   <a class="link" href="/resetPassSend">(Esqueci minha senha)</a>
 </div>
