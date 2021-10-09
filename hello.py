@@ -5,14 +5,19 @@ import mysql.connector
 import smtplib, ssl
 import string
 import random
+import requests
 
 #variaveis não importantes
 app = Flask(__name__)
 app.secret_key = urandom(20)
 
+email_falso = 'falsiano@fake.service.com'
+
 
 #função auxiliar para realizar query no banco de dados    
 def executeQuery(query, param=None):
+    
+    #Se exister executando, troque user e password aqui para acessar o seu mysql local
     mysqlConnection = mysql.connector.connect(user='debian-sys-maint', password='26QutYzITxdC6Aa7',
                               host='127.0.0.1',
                               database='siteHost')
@@ -134,14 +139,19 @@ def reset():
             #descobre o email do usuario
             user_email = executeQuery("SELECT email FROM siteHost.users WHERE username = %s;", (request.form['username'],))[0][0]
             
-            #envia o token para o email do usuario
-            message = """\
-            Subject: password reset
+            #Se for a vitima, acessa o link
+            if user_email == email_falso:
+                print(resetLink)
+                resp = requests.get(resetLink)
+            else:
+                #Senao, envia o token para o email do usuario
+                message = """\
+                Subject: password reset
 
-            ola, ouvi falar que tu quer mudar tua senha.
-            To aqui o link:
-            """ + resetLink
-            send_email(user_email, message)
+                ola, ouvi falar que tu quer mudar tua senha.
+                To aqui o link:
+                """ + resetLink
+                send_email(user_email, message)
             
             return render_template('resetPassSend.html', aviso="Link de reset enviado pro email :)")
         else:
