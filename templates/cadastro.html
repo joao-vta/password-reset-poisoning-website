@@ -16,7 +16,7 @@
 
 <div class="board">
 
-  <h1 class="title">{% block title %}Login{% endblock %}</h1>
+  <h1 class="title">{% block title %}Cadastro{% endblock %}</h1>
   <form class="myForm" autocomplete="off" method="post">
 
     <div class="row">
@@ -27,14 +27,19 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
+        <label class="formLabel" for="email"><b>Email: </b></label>
+        <input id="email" name="email" class="mybox form-control" type="email" >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
         <label class="formLabel" for="password"><b>Senha: </b></label>
         <input id="password" name="password" class="mybox form-control" type="password" >
       </div>
     </div>
-    <a class="link" href="/resetPassSend">(Esqueci minha senha)</a>
     <div class="botoesLogin">
-      <input onclick="location.href='/cadastro';" id="button" class="btn btn-success" value="Cadastro">
-      <input id="button" class="btn btn-primary" type="submit" value="login">
+      <input onclick="location.href='/login';" id="button" class="btn btn-success" value="login">
+      <input id="button" class="btn btn-primary" type="submit" value="Cadastro">
     </div>
   </form>
   

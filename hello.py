@@ -13,7 +13,7 @@ app.secret_key = urandom(20)
 
 #função auxiliar para realizar query no banco de dados    
 def executeQuery(query, param=None):
-    mysqlConnection = mysql.connector.connect(user='xxxxxxx', password='xxxxxxxx',
+    mysqlConnection = mysql.connector.connect(user='debian-sys-maint', password='26QutYzITxdC6Aa7',
                               host='127.0.0.1',
                               database='siteHost')
     myCursor = mysqlConnection.cursor()
@@ -60,6 +60,29 @@ def login():
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error='Senha ou nome de usuario errado')
+
+
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'GET':
+        if 'username' in session:
+            return redirect(url_for('index'))
+        else:
+            return render_template('cadastro.html')
+
+    elif request.method == 'POST':
+        
+        #verifica se o nome de usuario existe
+        user = executeQuery("SELECT * FROM siteHost.users WHERE username = %s;", (request.form['username'],))
+        
+        if len(user) > 0:
+            return render_template('cadastro.html', error='Nome de usuario ja existe')
+        
+        #insere dados no banco de dados
+        executeQuery("INSERT INTO siteHost.users (username, password, email) VALUES (%s, %s, %s);", 
+                     (request.form['username'],request.form['password'],request.form['email']))
+        
+        return redirect(url_for('login'))
 
 
 @app.route('/', methods=['GET', 'POST'])

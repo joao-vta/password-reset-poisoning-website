@@ -1,15 +1,5 @@
 
 
-.myForm .logout {
-    float: left;
-    height: 2%;
-    margin-left: 2%;
-    margin-right: -15%;
-    margin-top: 1%;
-    margin-bottom: 5%;
-    width: 15%;
-}
-
 .myForm .formLabel {
     text-align: right;
     font-size: 1.6rem;
@@ -18,7 +8,6 @@
 
 .myForm #content {
 
-    width: 90%;
     margin: auto;
     margin-top: 4%;
     margin-bottom: 2%;
@@ -34,14 +23,7 @@
     box-shadow: none;
 }
 
-.myForm #button {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    width: 30%;
-}
-.myForm #button:hover{
-    width: 60%;
-}
+
 
 .centralized {
     text-align: center;
@@ -77,16 +59,15 @@
 }
 
 .board {
-    background-color: rgb(250,250,250, 0.7);
+    background-color: rgba(250, 250, 250, 0.815);
+    backdrop-filter: blur( 7.5px );
+    -webkit-backdrop-filter: blur( 7.5px );
     border-radius: 25px;
-    width: 30vw;
-    height: 60vh;
+    width: 85vw;
     padding: 50px;
-    margin: auto;
-    margin-top: auto;
-    margin-top: 20vh;   
+    margin: 10px auto;
+    margin-top: 8vh;
     z-index: 2;
-    animation: fundoAnimado 5s infinite alternate;
 }
 
 
@@ -97,7 +78,7 @@
 body {
     background-image: url(./pipoca.jpg);
     background-size: cover;
-    overflow: hidden;
+
 }
 
 
@@ -110,17 +91,19 @@ body ::selection{
     justify-content: space-around;
 }
 
-.board .botoesLogin input {
-    transition: 0.5s;
+.myForm #button {
+    float: right;
+    width: 30%;
 }
-.board .botoesLogin input:hover{
-    border-radius: 50px;
-    width: 60%;
+.myForm #button:hover{
+    width: 40%;
 }
-#button {
-    transition: 0.5s;
+
+#button{    
+    transition: 0.3s ;
+    margin-top: 25px;
 }
-#button:hover{
+#button{
     border-radius: 50px;
     width: 60%;
 }
@@ -139,12 +122,58 @@ body ::selection{
     position: absolute;
     top: -10vh;
     width: 106px;
-    /* animation: pipocaCaindo 4s infinite ;
-    z-index: 0; */
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 
-@keyframes fundoAnimado{
-    0% {background-color: #fafafa33; border: 1px solid #0e0c0cbe;}
-    50% {background-color: #fafafa80;border: 1px solid #0e0c0c69;}
-    100% {background-color: #fafafab3;border: 1px solid #0e0c0c00;}
+.posts{
+    display: flex;
+    padding: 30px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.posts .board{
+    padding: 20px;
+    margin: inherit;
+    margin-top: inherit;
+    width: 65vh;
+}
+.posts .board a{
+    line-break: auto;
+    word-wrap: anywhere;
+}
+
+@media screen and (min-width: 600px) {
+    .board {
+      width: 65vw;
+    }
+
+}
+@media screen and (min-width: 800px) {
+    .board {
+      width: 50vw;
+    }
+    .posts .board{
+        width: 45%;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .board {
+      width: 40vw;
+    }
+    .posts .board{
+        width: 30%;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .board {
+      width: 35vw;
+    }    
+    .posts .board{
+        width: 20%;
+    }
 }
