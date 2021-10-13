@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="board">
+
+  <h1 class="title">{% block title %}Erro{% endblock %}</h1>
+  <img id="erro" src=/static/erro.png>
+</div>
+{% if error %}
+  <div class="erro alert alert-danger" role="alert">
+    {{ error}}
+  </div> 
+{% endif %}
+{% if aviso %}
+  <div class="erro alert alert-success" role="alert">
+    {{ aviso}}
+  </div> 
+{% endif %}
+  </div>
+
+
+{% endblock %}

@@ -6,6 +6,7 @@ import smtplib, ssl
 import string
 import random
 import requests
+import json
 
 #variaveis não importantes
 app = Flask(__name__)
@@ -20,7 +21,21 @@ config = {
     'database':'siteHost'
 }
 
+forward_hosts =[
+"X-Host",
+"X-Forwarded-Server",
+"X-HTTP-Host-Override",
+"Forwarded"
+]
 
+erro_host_errado = "erro, host invalido  >:("
+
+def correct_host(headers):
+    if headers['host'] == "127.0.0.1:5000":
+        return True
+    else:
+        return False
+    
 #função auxiliar para realizar query no banco de dados    
 def executeQuery(query, param=None):
     
@@ -53,9 +68,9 @@ def send_email(receiver_address, message):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if ('X-Forwarded-Host' in request.headers):
-        print(request.headers['X-Forwarded-Host'])
-    print(request.headers['host'])
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+    
     if request.method == 'GET':
         if 'username' in session:
             return redirect(url_for('index'))
@@ -77,6 +92,9 @@ def login():
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+    
     if request.method == 'GET':
         if 'username' in session:
             return redirect(url_for('index'))
@@ -100,9 +118,12 @@ def cadastro():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+    
     if 'username' in session:
         if request.method == 'GET':
-            
+
             #seleciona 5 ultimos posts e renderiza eles 
             posts = executeQuery('SELECT * FROM siteHost.posts ORDER BY id DESC LIMIT 5;')
             return render_template('index.html', posts=posts)
@@ -126,7 +147,11 @@ def index():
 
 @app.route('/resetPassSend', methods=['GET', 'POST'])
 def reset():
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+        
     if request.method == 'GET':
+        
         return render_template('resetPassSend.html')
 
     elif request.method == 'POST':
@@ -168,7 +193,11 @@ def reset():
 
 @app.route('/resetPassReceive', methods=['GET', 'POST'])
 def receive():
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+    
     if request.method == 'GET':
+        
         if 'token' in request.args:
 
             #seleciona conta que tem o token do usuario, se existe
@@ -189,6 +218,9 @@ def receive():
 
 @app.route('/seepost')
 def seepost():
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+    
     postID = request.args.get('id')
     postInfo = executeQuery('SELECT titulo, conteudo, link, author FROM siteHost.posts WHERE id=%s;', (postID,))
     print(postInfo)
@@ -197,6 +229,9 @@ def seepost():
     
 @app.route('/logout')
 def logout():
+    if not correct_host(request.headers):
+        return render_template('erro.html', error="Host invalido >:(")
+    
     session.clear()
     return redirect(url_for('login'))
 
