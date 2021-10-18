@@ -36,6 +36,8 @@ sender_password = 'badjoao1234'
 
 erro_host_errado = "erro, host invalido  >:("
 
+flag = "ctf{another_host_injection}"
+
 def correct_host(headers):
     for possible_header in forward_hosts:
         if possible_header in headers:
@@ -134,7 +136,12 @@ def index():
 
             #seleciona 5 ultimos posts e renderiza eles 
             posts = executeQuery('SELECT * FROM siteHost.posts ORDER BY id DESC LIMIT 5;')
-            return render_template('index.html', posts=posts)
+            
+            
+            if (session['username'] == 'admin'):   
+                return render_template('index.html', posts=posts, flag=flag)
+            else:
+                return render_template('index.html', posts=posts)
         
         elif request.method == 'POST':
             

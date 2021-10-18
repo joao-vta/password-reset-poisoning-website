@@ -23,7 +23,7 @@ SQL_config = {
 sender_address = 'bad.site.no.reply@gmail.com'
 sender_password = 'badjoao1234'
 
-flag = "ctf{p4ssw0rd_inj3ction_4_d_win}"
+flag = "ctf{password_reset_for_the_win}"
 
 #função auxiliar para realizar query no banco de dados    
 def executeQuery(query, param=None):
@@ -107,6 +107,7 @@ def index():
             
             #seleciona 5 ultimos posts e renderiza eles 
             posts = executeQuery('SELECT * FROM siteHost.posts ORDER BY id DESC LIMIT 5;')
+            
 
             if (session['username'] == 'admin'):   
                 return render_template('index.html', posts=posts, flag=flag)
