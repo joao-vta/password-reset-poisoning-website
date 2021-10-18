@@ -14,7 +14,7 @@ app.secret_key = urandom(20)
 
 email_falso = 'falsiano@fake.service.com'
 
-config = {
+SQL_config = {
     'user':'debian-sys-maint',
     'password':'26QutYzITxdC6Aa7',
     'host':'127.0.0.1',
@@ -23,16 +23,26 @@ config = {
 
 forward_hosts =[
 "X-Host",
+"X-Forwarded-Host",
 "X-Forwarded-Server",
 "X-HTTP-Host-Override",
 "Forwarded"
 ]
 
+host = "127.0.0.1:5000"
+
+sender_address = 'bad.site.no.reply@gmail.com'
+sender_password = 'badjoao1234'
+
 erro_host_errado = "erro, host invalido  >:("
 
 def correct_host(headers):
-    if headers['host'] == "127.0.0.1:5000":
-        return True
+    for possible_header in forward_hosts:
+        if possible_header in headers:
+            print(possible_header)
+            return headers[possible_header]
+    if headers['host'] == host:
+        return headers['host']
     else:
         return False
     
@@ -40,7 +50,7 @@ def correct_host(headers):
 def executeQuery(query, param=None):
     
     #Se exister executando, troque user e password aqui para acessar o seu mysql local
-    mysqlConnection = mysql.connector.connect(**config)
+    mysqlConnection = mysql.connector.connect(**SQL_config)
     myCursor = mysqlConnection.cursor()
     if param == None:
         myCursor.execute(query)
@@ -54,8 +64,6 @@ def executeQuery(query, param=None):
     
 #funcao auxiliar que envia email():
 def send_email(receiver_address, message):
-    sender_address = 'bad.site.no.reply@gmail.com'
-    sender_password = 'badjoao1234'
     port = 465 
 
     context = ssl.create_default_context()
@@ -130,13 +138,13 @@ def index():
         
         elif request.method == 'POST':
             
-            #cria link baseado no ultimo ID
+            #cria link baseado no ID
             queryRes = executeQuery('''SELECT `AUTO_INCREMENT`
                                     FROM  INFORMATION_SCHEMA.TABLES
                                     WHERE TABLE_SCHEMA = 'siteHost'
                                     AND   TABLE_NAME   = 'posts';''')
             nextID = int(queryRes[0][0])            
-            myLink = 'http://'+request.headers['host']+'/seepost?id='+str(nextID)
+            myLink = '/seepost?id='+str(nextID)
             
             #insere no banco de dados novo post
             executeQuery("INSERT INTO siteHost.posts (titulo, conteudo, link, author) VALUES (%s, %s, %s, %s);", (request.form['title'], request.form['content'], myLink, session['username']))
@@ -167,7 +175,7 @@ def reset():
             executeQuery("UPDATE siteHost.users SET token = %s WHERE username = %s;", (token, request.form['username']))
             
             #gera link de reset de senha com token
-            resetLink = 'http://'+request.headers['host'] +'/resetPassReceive?token='+token
+            resetLink = 'http://'+ correct_host(request.headers) +'/resetPassReceive?token='+token
             
             #descobre o email do usuario
             user_email = executeQuery("SELECT email FROM siteHost.users WHERE username = %s;", (request.form['username'],))[0][0]

@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-
+{% if flag %}
+  <div class="erro alert alert-success" role="alert">
+    Bem vindo, admin. A flag é {{flag}}
+  </div> 
+{% endif %}
  
 <div class="board" style="margin-top: 30px;">
   <h1 class="centralized">{% block title %}Novo Post{% endblock %}</h1>
