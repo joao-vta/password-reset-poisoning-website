@@ -29,7 +29,7 @@ forward_hosts =[
 "Forwarded"
 ]
 
-host = "127.0.0.1:5000"
+host = "192.168.1.107:5000"
 
 sender_address = 'bad.site.no.reply@gmail.com'
 sender_password = 'badjoao1234'
