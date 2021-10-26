@@ -4,7 +4,7 @@
 <a href="/"><img id="return" src='/static/return.png'></a>
 <div class="board">
   <h1 class="title">{% block title %}Recuperar Senha{% endblock %}</h1>
-    {% if token %}
+    {% if success %}
   <h4>Digite nova senha </h4>
   <form class="myForm" autocomplete="off" method="post">
 
@@ -18,6 +18,11 @@
     <input id="button" class="btn btn-primary" type="submit" value="Resetar Senha">
   </form>
 
+  {% elif aviso %}
+  </div>
+  <div class="erro alert alert-success" role="alert">
+    {{ aviso}}
+  </div> 
   {% else %}
     <h4>Erro</h4>
   </div>

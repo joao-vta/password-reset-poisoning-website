@@ -182,16 +182,24 @@ def receive():
             account = executeQuery("SELECT * FROM siteHost.users WHERE token=%s", (request.args.get('token'),))
 
             if len(account)>0:
-                return render_template('resetPassReceive.html', token=request.args.get('token'))
+                print("Token que esta no banco de dados foi recebido")
+                print(account)
+                return render_template('resetPassReceive.html', success=True, token=request.args.get('token'))
             else:
+                print("Token que nao esta no banco de dados foi recebido")
                 print(request.args.get('token'))
-                return render_template('resetPassReceive.html')
-            pass
+                return render_template('resetPassReceive.html', sucess=False)
         else:
             return render_template('resetPassReceive.html')
     elif request.method == 'POST':
-        executeQuery("UPDATE siteHost.users SET password = %s, token = NULL WHERE token = %s", (request.form['password'],request.form['token']))
-        return redirect(url_for('login'))
+        
+        account = executeQuery("SELECT username FROM siteHost.users WHERE token=%s", (request.form['token'],))
+        if (account[0][0] == 'admin'):
+            return render_template('resetPassReceive.html', sucess=True, aviso="Parece que voce é o admin. Aqui a sua flag: " + flag)
+        else:
+            print(f"usuario {account[0][0]} resetou a senha dele")
+            executeQuery("UPDATE siteHost.users SET password = %s, token = NULL WHERE token = %s", (request.form['password'],request.form['token']))
+            return redirect(url_for('login'))
     
 
 @app.route('/seepost')
