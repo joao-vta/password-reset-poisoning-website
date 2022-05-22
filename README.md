@@ -5,7 +5,6 @@ Instruções para uso local:
 ## instalação
 - Crie um venv
 - - virtualenv -p python3 venv
-- Copie o codigo fonte
 - Entre no venv Instale o mysqlconnector, flask e requests no venv com PIP
 - - source bin/activate
 - - pip3 install flask
