@@ -23,3 +23,7 @@ Instruções para uso local:
 - Especifique o app do flask executando 'export FLASK_APP=hello.py'
 - - Opcionalmente, execute 'export FLASK_ENV=development' para ativar modo de desenvolvimento
 - Inicie o site executando 'flask run'
+
+## vulnerabilidade
+A vulnerabilidade do site ocorre quando o header ```host``` é concatenado no link de recuperação de senha. Como consequência, é possível manipular tal link.
+O ataque consiste em manipular o header ```host``` de modo a roubar o código de recuperação de senha de um usuário arbitrário.
