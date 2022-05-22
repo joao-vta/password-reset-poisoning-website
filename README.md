@@ -1,4 +1,4 @@
-# Website vulnerável to password reset posoning
+# Website vulnerável a password reset posoning
 Codigo Fonte de um site vulneravel a Host Header Attack.  
 
 ## Vulnerabilidade
